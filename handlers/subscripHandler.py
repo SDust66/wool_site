@@ -19,16 +19,16 @@ class SubscriptionPageHandler(tornado.web.RequestHandler):
             wzname = session['yhm']
             sql_tag = "SELECT usertag FROM tags_user WHERE username = '%s'" % (wzname)
             tagstr = mysql_conn.query(sql_tag)
-            print(type(tagstr), type(tagstr[0]['usertag']),tagstr,tagstr[0]['usertag'])
+            #print(type(tagstr), type(tagstr[0]['usertag']),tagstr,tagstr[0]['usertag'])
             tags = tagstr[0]['usertag'].encode('utf-8')
             tags = tags.split(',')
             infos = []
             for tag in tags:
-                print(tag)
+                #print(tag)
                 sql = "SELECT * FROM infos WHERE info_label LIKE '%%%%%s%%%%' ORDER BY info_id DESC LIMIT 100"%tag
                 info = mysql_conn.query(sql)
                 infos.extend(info)
-            print(infos)
+            #print(infos)
             self.render('subscription.html',infos=infos,username=wzname)
         else:
             self.redirect('/login')

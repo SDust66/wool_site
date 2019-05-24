@@ -24,43 +24,42 @@
     <div class="container-xl">
         <div class="row clear">
 
-          <div class="col-12 col-9-m">
-              <div class="row clear">
-                <div class="col-12 col-6-m nav">
-                    <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-
-                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="/subscription">我的订阅</a>
-
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="https://xclient.info/a/">排行榜</a>
-                    <a class="nav-item nav-wishlist" href="#">分类</a>
-                    <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
-                </div>
-                <div class="col-12 col-4-m">
-                        <form id="search" method="post" action="/search">
-                            <span class="input_wrap">
-                                <input type="text" name="info_keyword" class="text" placeholder="输入关键字搜索" />
-                                <button type="submit" class="submit icon-search"></button>
-                            </span>
-                            <input type="hidden" name="t" value="soft" />
-                        </form>
-                </div>
-                <div class="col-12 col-2-m">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li class="dropdown ">
-                        {% if username == " "%}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/login">登录</a> <span class="caret"></span></a>
-                        {% else %}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">我的保存</a></li>
-                                <li><a href="/logout">退出</a></li>
-                            </ul>
-                        {% end %}
-                      </li>
-                    </ul>
-                </div>
+            <div class="col-12 col-9-m">
+                <div class="row clear">
+                  <div class="col-12 col-4-m nav">
+                      <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
+                      <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                      <a class="nav-item nav-wishlist" href="/types">分类</a>
+                  </div>
+                  <div class="col-12 col-4-m">
+                          <form id="search" method="post" action="/search">
+                              <span class="input_wrap">
+                                  <input type="text" name="info_keyword" class="text" placeholder="输入关键字搜索" />
+                                  <button type="submit" class="submit icon-search"></button>
+                              </span>
+                              <input type="hidden" name="t" value="soft" />
+                          </form>
+                  </div>
+                  <div class="col-12 col-4-m">
+                      <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown ">
+                          {% if username == " "%}
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/login">登录</a> <span class="caret"></span></a>
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/signin">注册</a> <span class="caret"></span></a>
+                          {% else %}
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="#">我的保存</a></li>
+                                  <li><a href="/po">我要爆料</a></li>
+                                  <li><a href="/subscription">我的订阅</a></li>
+                                  <li><a href="/logout">退出</a></li>
+                              </ul>
+                          {% end %}
+                        </li>
+                      </ul>
+                  </div>
               </div>
-          </div>
+            </div>
 
         </div>
     </div>
@@ -90,8 +89,8 @@
                 </div>
             </a>
             <div class="cates">
-                {% if info['info_tags'] %}
-                    {% for tag in info['info_tags'].split(",")[:3]%}
+                {% if info['info_label'] %}
+                    {% for tag in info['info_label'].split(",")[:3]%}
                     <a href="#">{{tag}}</a>
                     {% end %}
                 {% end %}

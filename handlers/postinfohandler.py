@@ -16,9 +16,10 @@ class PostInfoHandler(tornado.web.RequestHandler):
         session = session_zc.Session(self, 1)
         # 判断session里的zhuangtai等于True
         if session['zhuangtai'] == True:
-            self.render('post_page.html')
+            wzname=session['yhm']
+            self.render('post_page.html',username=wzname)
         else:
-            self.redirect("/")
+            self.redirect("/login")
         #self.render('post_page.html')
 
     def post(self):
