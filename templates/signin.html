@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+	  body{
+		  padding-top:70px;
+		  padding-bottom:50px;
+		  color:#6BC1E5;
+	  }
+	</style>
+</head>
+<body>
+<center>
+	<!--注册界面-->
+	<div>
+		<div class="inputboxhead">
+			<h3>注&nbsp&nbsp&nbsp&nbsp册</h3>
+		</div>
+		<form action="/signin" method="post">
+			<div style="margin-top: 25px;position: relative;">
+				<input class="textbox" type="text" name="login_email" placeholder="邮箱地址">
+			</div>
+			<div style="margin-top: 25px;position: relative;">
+				<input class="textbox" type="text" name="login_name" placeholder="短于15位字符的昵称">
+			</div>
+			<div style="margin-top: 25px;position: relative;">
+				<input  class="textbox" type="password" name="password1" placeholder="密码">
+			</div>
+			<div style="margin-top: 25px;position: relative;">
+				<input class="textbox" type="password" name="password2" placeholder="再次输入密码">
+			</div>
+			<div style="margin-top: 25px;position: relative;">
+				<button type="submit" class="btn btn-primary">  注册  </button>
+			</div>
+		</form>
+		<div class="signup" style="padding-top: 20px">已有帐号？<a href="/login">登录</a>
+		</div>
+	</div>
+</center>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

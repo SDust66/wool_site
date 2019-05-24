@@ -5,6 +5,9 @@ from handlers.searchpagehandler  import SearchPageHandler
 from handlers.singleitemhandler  import SingleItemHandler
 from handlers.typeshandler 		 import TypesHandler
 from handlers.rankpagehandler 	 import RankPageHandler
+from handlers.loginhandler 	 import LoginHandler
+from handlers.signhandler import SignHandler
+from handlers.subscripHandler import SubscriptionPageHandler
 
 
 urls=[		
@@ -14,5 +17,8 @@ urls=[
         (r'/search',SearchPageHandler),
         (r'/comment',CommentItemHandler),
         (r'/types',TypesHandler),
-        (r'/rank/(\w+)',RankPageHandler)
+        (r'/rank/(\w+)',RankPageHandler),
+        (r'/login',LoginHandler),
+        (r'/signin',SignHandler),
+        (r'/subscription',SubscriptionPageHandler)
 ]

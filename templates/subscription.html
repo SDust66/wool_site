@@ -1,34 +1,38 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>HITwh羊毛优惠分享中心</title>
+<title>我的订阅</title>
 <!--
 <link rel="stylesheet" href="https://img.xclient.info/css/styles.min.css">
 <link rel="stylesheet" href="https://img.xclient.info/css/style.v3.css?v=19041513">-->
 <link rel="stylesheet" href="/static/css/styles.min.css">
 <link rel="stylesheet" href="/static/css/style.v3.css">
+  <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
 <body>
 
 <header class="header" id="header">
-    
+
     <div class="container-xl">
         <div class="row clear">
 
           <div class="col-12 col-9-m">
               <div class="row clear">
-                <div class="col-12 col-8-m nav">
+                <div class="col-12 col-6-m nav">
                     <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
 
-                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
+                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="/subscription">我的订阅</a>
 
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
-                    <a class="nav-item nav-wishlist" href="/types">分类</a>
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="https://xclient.info/a/">排行榜</a>
+                    <a class="nav-item nav-wishlist" href="#">分类</a>
                     <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
                 </div>
                 <div class="col-12 col-4-m">
@@ -45,7 +49,6 @@
                       <li class="dropdown ">
                         {% if username == " "%}
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/login">登录</a> <span class="caret"></span></a>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/signin">注册</a> <span class="caret"></span></a>
                         {% else %}
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -56,8 +59,9 @@
                       </li>
                     </ul>
                 </div>
+              </div>
           </div>
-          
+
         </div>
     </div>
 </header><!-- end #header -->
@@ -68,16 +72,16 @@
         <div class="main">
             <a href="/item?info_id={{info['info_id']}}" title="{{info['info_title']}}">
                 {% if info['info_image'] %}
-                <img src="{{info['info_image']}}">
+                <img src="http://10.245.146.207/images/{{info['info_image'].split('/')[-1]}}" alt="{{info['info_title']}}">
                 {% end %}
                 <div class="status_bar">
                     <span class="item download">
                         <span class="glyphicon glyphicon-usd"></span>
-                        <font color="#4eaade">{{info['info_price'][:8]}}</font>  
+                        <font color="#4eaade">{{info['info_price'][:8]}}</font>
                     </span>
                     <span class="item date">
                         <i class="icon-date"></i>
-                        {{info['info_update_time']}}                                              
+                        {{info['info_update_time']}}
                     </span>
                 </div>
                 <div class="info">
@@ -86,8 +90,8 @@
                 </div>
             </a>
             <div class="cates">
-                {% if info['info_label'] %}
-                    {% for tag in info['info_label'].split(",")[:3]%}
+                {% if info['info_tags'] %}
+                    {% for tag in info['info_tags'].split(",")[:3]%}
                     <a href="#">{{tag}}</a>
                     {% end %}
                 {% end %}
@@ -97,43 +101,6 @@
     {% end %}
 
 </ul>
-<ol class="page-navigator">
-    {% if source=="main" %}
-        {% if page>1 %}
-        <li class="prev">
-            <a href="/?page={{page-1}}">« 前一页</a>
-        </li>
-        {% end %}
-
-        <li class="next">
-            <a href="/?page={{page+1}}">后一页 »</a>
-        </li>
-    {% end %}
-
-    {% if source=="search" %}
-        {% if page>1 %}
-        <li class="prev">
-            <a href="/?info_keyword={{kwd}}&page={{page-1}}">« 前一页</a>
-        </li>
-        {% end %}
-
-        <li class="next">
-            <a href="/?info_keyword={{kwd}}&page={{page+1}}">后一页 »</a>
-        </li>
-    {% end %}
-
-    {% if source=="tag" %}
-        {% if page>1 %}
-        <li class="prev">
-            <a href="/?tag={{kwd}}&page={{page-1}}">« 前一页</a>
-        </li>
-        {% end %}
-
-        <li class="next">
-            <a href="/?tag={{kwd}}&page={{page+1}}">后一页 »</a>
-        </li>
-    {% end %}
-</ol>
 <script>
     var demobg = document.querySelector(".demo-bg");
     var demotxt = document.querySelector(".demo-txt");

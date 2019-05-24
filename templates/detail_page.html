@@ -56,7 +56,7 @@
 <div class="post-head media">
 
     <div class="container-xl">
-        <img class="lim-icon app_ico" src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" attr="WinX DVD Ripper 6.2.1-20190416 DVD视频转换" title="WinX DVD Ripper 6.2.1-20190416 DVD视频转换" alt="WinX DVD Ripper 6.2.1-20190416 DVD视频转换">
+        <img src="{{infos['info_image']}}">
         <h1 class="post-title">{{infos['info_title']}}</h1>
         <ul class="post-meta">
             <li>
@@ -64,8 +64,8 @@
             </li>
             <li>
                 <i class="icon-tag"></i>
-                {% if infos['info_tags'] %}
-                    {% for tag in infos['info_tags'] %}
+                {% if infos['info_label'] %}
+                    {% for tag in infos['info_label'] %}
                     <a href="#">{{tag}}</a>
                         
                     {% end %}
@@ -78,7 +78,7 @@
         </ul>
 
         <div class="share_box">
-            <span class="social-share" data-initialized="true" data-title="WinX DVD Ripper 6.2.1-20190416 DVD视频转换">
+            <span class="social-share" data-initialized="true">
                 <a href="#" class="social-share-icon icon-weibo"></a>
                 <a href="#" class="social-share-icon icon-wechat"></a>
                 <a href="#" class="social-share-icon icon-douban"></a>
@@ -95,29 +95,7 @@
             <div class="col-12 col-8-m">
                 <div class="white-box">
                     <div class="album-swiper-container swiper-container">
-                        <div class="swiper-wrapper lim-album" id="swiper-wrapper">
-                            {% if infos['info_order_shot'] %}
-                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
-                                <img src="http://10.245.146.207/images/{{infos['info_order_shot'].split('/')[-1]}}" alt="{{infos['info_title']}}">
-                            </a>
-                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
-                                <img src="http://10.245.146.207/images/{{infos['info_order_shot'].split('/')[-1]}}" alt="{{infos['info_title']}}">
-                            </a>
-                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
-                                <img src="http://10.245.146.207/images/{{infos['info_order_shot'].split('/')[-1]}}" alt="{{infos['info_title']}}">
-                            </a>
-                            {% else %}
-                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
-                                <img src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" alt="{{infos['info_title']}}">
-                            </a>
-                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
-                                <img src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" alt="{{infos['info_title']}}">
-                            </a>
-                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
-                                <img src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" alt="{{infos['info_title']}}">
-                            </a>
-                            {% end %}
-                        </div>
+                        
                         <!-- Add Pagination -->
                         <div class="swiper-scrollbar"></div>
                        
@@ -134,11 +112,9 @@
                         <a href="/comment?yn=y&info_id={{infos['info_id']}}" action="get">SKR！</a>
                     </div>
                     <div class="download_btn">
-                        <a href="/comment?yn=n&info_id={{infos['info_id']}}">这个不行</a>
+                        <a href="/comment?yn=n&info_id={{infos['info_id']}}">我觉得不行</a>
                     </div>
-                    <div class="download_btn">
-                        <a href="{{infos['info_link']}}" target="_blank">直达链接</a>
-                    </div>
+                    
 
                     <div class="app_info box">
                         <b class="tit">基本信息</b>
@@ -150,7 +126,7 @@
                             </tr>
                             <tr>
                                 <th>类别</th>
-                                <td><a href="https://xclient.info/s/c/media/">{{infos['info_tags'][0]}}</a></td>
+                                <td><a href="https://xclient.info/s/c/media/">{{infos['info_label'][1]}}</a></td>
                             </tr>
                             <tr>
                                 <th>更新时间</th>
@@ -220,7 +196,7 @@
                                 </div>
                             </a>
                             <div class="cates">
-                                <a href="/item?info_id={{t['info_id']}}">{{t['info_tags'].split(",")[0]}}</a>                        </div>
+                                <a href="/item?info_id={{t['info_id']}}">{{t['info_label'].split(",")[0]}}</a>                        </div>
                         </div>
                     </li>
                 {% end %}
@@ -253,66 +229,6 @@
 </div>
 
 
-
-
-<div class="row pad-top-20">
-    <div class="col-12">
-        <div class="white-box">
-            
-            <!-- 历史版本 -->
-            <div class="history_version" id="versions">
-                <b>历史优惠</b>
-                <table>
-                    <thead>
-                    <tr>
-                        <th class="version_num">品名</th>
-                        <th>更新时间</th>
-                        <th>价格</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                                                <tr>
-                        <td class="version_num">2.30</td>
-                        <td>英文</td>
-                        <td>2019-05-10</td>
-                        <td>30.3M</td>
-                        <td>
-                             
-                            <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=2.30&amp;k=0&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
-                                <i class="iconfont icon-disk-ctfile"></i> 
-                                城通网盘                                    </a>
-                             
-                            <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=2.30&amp;k=1&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
-                                <i class="iconfont icon-disk-baidu"></i> 
-                                百度云盘                                    </a>
-                                                            </td>
-                    </tr>
-                        <tr>
-                            <td class="version_num">1.52</td>
-                            <td>英文</td>
-                            <td>2018-07-04</td>
-                            <td>59.9M</td>
-                            <td>
-                                 
-                                <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=1.52&amp;k=2&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
-                                    <i class="iconfont icon-disk-ctfile"></i> 
-                                    城通网盘                                    </a>
-                                 
-                                <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=1.52&amp;k=3&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
-                                    <i class="iconfont icon-disk-baidu"></i> 
-                                    百度云盘                                    </a>
-                                                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <!--相关应用 start-->
 <div class="related_item box">
     <div class="container-xl">
@@ -337,7 +253,7 @@
                                 </div>
                             </a>
                             <div class="cates">
-                                {% for t in r['info_tags'].split(",")[:3] %}
+                                {% for t in r['info_label'].split(",")[:3] %}
                                     {% if len(t)>7 and "/" not in t%}
 
                                     {% else %}

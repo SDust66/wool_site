@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登陆</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+	  body{
+		  padding-top:70px;
+		  padding-bottom:50px;
+		  color:#6BC1E5;
+	  }
+  	</style>
+</head>
+<body>
+<center>
+	<!--登录界面-->
+	<div>
+		<div class="inputboxhead">
+			<h3>登&nbsp&nbsp&nbsp&nbsp陆</h3>
+		</div>
+		<form action="/login" method="post">
+			<div style="margin-top: 25px;">
+				<input class="textbox" type="text" name="login_name" placeholder="用户名">
+			</div>
+			<div style="margin-top: 25px;position: relative;">
+				<input  class="textbox" type="password" name="password1" placeholder="密码">
+			</div>
+			<div style="margin-top: 25px;position: relative;">
+				<button type="submit" class="btn btn-primary">  登录  </button>
+			</div>
+		</form>
+		<div class="signup" style="padding-top: 20px">
+		还没有帐号？<a href="/signin">注册</a>
+		</div>
+	</div>
+</center>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
