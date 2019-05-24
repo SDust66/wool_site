@@ -10,7 +10,7 @@ mysql_conn = torndb.Connection("10.245.146.207:3306","wool",user="campuswool",pa
 
 class PostInfoHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('po.html')
+        self.render('post_page.html')
 
     def post(self):
         info_title = self.get_argument('info_title').encode("utf-8")

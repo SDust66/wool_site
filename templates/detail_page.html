@@ -1,0 +1,360 @@
+{% autoescape None %}
+
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>{{infos['info_title']}}</title>
+<link href="https://cdn.bootcss.com/Swiper/4.2.0/css/swiper.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://img.xclient.info/css/styles.min.css">
+<link rel="stylesheet" href="/static/css/style.v3.min.css">
+<script src="https://img.xclient.info/js/vue.min.js"></script>
+
+
+</head>
+<body>
+<header class="header" id="header">
+    
+    <div class="container-xl">
+        <div class="row clear">
+
+          <div class="col-12 col-9-m">
+              <div class="row clear">
+                <div class="col-12 col-8-m nav">
+                    <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
+
+                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
+
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+
+                    <a class="nav-item nav-wishlist" href="/types" >分类</a>
+                    <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
+                </div>
+                <div class="col-12 col-4-m">
+                        <form id="search" method="post" action="/search">
+                            <span class="input_wrap">
+                                <input type="text" name="info_keyword" class="text" placeholder="输入关键字搜索" />
+                                <button type="submit" class="submit icon-search"></button>
+                            </span>
+                            <input type="hidden" name="t" value="soft" />
+                        </form>
+                </div>
+              </div>
+                
+          </div>
+          
+        </div>
+    </div>
+</header><!-- end #header -->
+
+
+
+<div class="post-head media">
+
+    <div class="container-xl">
+        <img class="lim-icon app_ico" src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" attr="WinX DVD Ripper 6.2.1-20190416 DVD视频转换" title="WinX DVD Ripper 6.2.1-20190416 DVD视频转换" alt="WinX DVD Ripper 6.2.1-20190416 DVD视频转换">
+        <h1 class="post-title">{{infos['info_title']}}</h1>
+        <ul class="post-meta">
+            <li>
+                <time datetime="2019-01-22T16:36:00+08:00">{{infos['info_update_time']}}</time>
+            </li>
+            <li>
+                <i class="icon-tag"></i>
+                {% if infos['info_tags'] %}
+                    {% for tag in infos['info_tags'] %}
+                    <a href="#">{{tag}}</a>
+                        
+                    {% end %}
+                {% end %}
+          
+            </li>
+            <li>
+                <i class="icon-view"></i>{{infos['info_visited']}}            
+            </li>
+        </ul>
+
+        <div class="share_box">
+            <span class="social-share" data-initialized="true" data-title="WinX DVD Ripper 6.2.1-20190416 DVD视频转换">
+                <a href="#" class="social-share-icon icon-weibo"></a>
+                <a href="#" class="social-share-icon icon-wechat"></a>
+                <a href="#" class="social-share-icon icon-douban"></a>
+                <a href="#" class="social-share-icon icon-qq"></a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div id="body">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-12 col-8-m">
+                <div class="white-box">
+                    <div class="album-swiper-container swiper-container">
+                        <div class="swiper-wrapper lim-album" id="swiper-wrapper">
+                            {% if infos['info_order_shot'] %}
+                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
+                                <img src="http://10.245.146.207/images/{{infos['info_order_shot'].split('/')[-1]}}" alt="{{infos['info_title']}}">
+                            </a>
+                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
+                                <img src="http://10.245.146.207/images/{{infos['info_order_shot'].split('/')[-1]}}" alt="{{infos['info_title']}}">
+                            </a>
+                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
+                                <img src="http://10.245.146.207/images/{{infos['info_order_shot'].split('/')[-1]}}" alt="{{infos['info_title']}}">
+                            </a>
+                            {% else %}
+                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
+                                <img src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" alt="{{infos['info_title']}}">
+                            </a>
+                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
+                                <img src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" alt="{{infos['info_title']}}">
+                            </a>
+                            <a href="javascript:;" class="lim-album-item swiper-slide" title="{{infos['info_title']}}">
+                                <img src="http://10.245.146.207/images/{{infos['info_image'].split('/')[-1]}}" alt="{{infos['info_title']}}">
+                            </a>
+                            {% end %}
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-scrollbar"></div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-4-m">
+                <div class="white-box">
+                    <span class="downloads">
+                        {{infos['info_price']}}                    
+                    </span>
+
+                    <div class="download_btn " background-color= "#4CAF50">
+                        <a href="/comment?yn=y&info_id={{infos['info_id']}}" action="get">SKR！</a>
+                    </div>
+                    <div class="download_btn">
+                        <a href="/comment?yn=n&info_id={{infos['info_id']}}">这个不行</a>
+                    </div>
+                    <div class="download_btn">
+                        <a href="{{infos['info_link']}}" target="_blank">直达链接</a>
+                    </div>
+
+                    <div class="app_info box">
+                        <b class="tit">基本信息</b>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th>爆料人</th>
+                                <td>6.2.1-20190416</td>
+                            </tr>
+                            <tr>
+                                <th>类别</th>
+                                <td><a href="https://xclient.info/s/c/media/">{{infos['info_tags'][0]}}</a></td>
+                            </tr>
+                            <tr>
+                                <th>更新时间</th>
+                                <td>{{infos['info_update_time']}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row pad-top-20">
+            <div class="col-12 col-8-m" id="main" role="main">
+
+                <div class="white-box">
+
+                    <article class="post">
+
+
+                        <div class="post-summary">
+                            <p>{{infos['info_title']}}</p>
+                        </div>
+
+                        <div class="post-content" id="post-content">
+                            <div class="post-union"></div>
+                            {{infos['info_detail']}}
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div><!-- end #main-->
+
+
+
+<div class="col-12 col-4-m kit-hidden-tb" id="secondary" role="complementary">
+    <div class="white-box">
+
+
+
+        <!-- ad sidebar -->
+        
+        <div class="side_app_box box">
+            <b class="tit">热门优惠</b>
+                <ul class="app_list">
+                {% for t in top %}
+
+                    <li>
+                        <div class="main">
+                            <a href="/item?info_id={{t['info_id']}}" title="Sketch 54.1 轻量易用的矢量设计工具">
+                                <img class="lim-icon" src="http://10.245.146.207/images/{{t['info_image'].split('/')[-1]}}" alt="Sketch 54.1 轻量易用的矢量设计工具">
+                                
+                                <div class="info">
+                                    <h3>{{t['info_title']}}</h3>
+                                    <p>{{t['info_detail']}}</p>
+                                </div>
+                                <div class="status_bar">
+                                        <span class="item download">
+                                            <i class="icon-view"></i>
+                                            {{t['info_visited']}}                                 </span>
+                                        <span class="item date">
+                                            <i class="icon-date"></i>
+                                            {{t['info_update_time']}}                                    </span>
+                                </div>
+                            </a>
+                            <div class="cates">
+                                <a href="/item?info_id={{t['info_id']}}">{{t['info_tags'].split(",")[0]}}</a>                        </div>
+                        </div>
+                    </li>
+                {% end %}
+                </ul>
+
+        </div>
+        
+    </div>
+</div>
+<div class="error_report_box error_report_box_new clearfix">
+<div class="report_title">我要举报：</div>
+<ul class="error_report">
+
+
+<li class="li other" id="other_report_reason" data-name="其他举报"><div class="other_report_box">
+请选择举报理由：
+<ul class="report_reason">
+        <form method="post" action="/item">
+            <input type="checkbox" name="reason" value="bad">假冒伪劣<br>
+            <input type="checkbox" name="reason" value="porn">色情反动<br>
+            <input type="checkbox" name="reason" value="fake">虚假宣传<br>
+            <input type="checkbox" name="reason" value="other">其他<br>
+            <input type="submit">
+        </form>
+</ul>
+
+</div>
+</li>
+</ul>
+</div>
+
+
+
+
+<div class="row pad-top-20">
+    <div class="col-12">
+        <div class="white-box">
+            
+            <!-- 历史版本 -->
+            <div class="history_version" id="versions">
+                <b>历史优惠</b>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="version_num">品名</th>
+                        <th>更新时间</th>
+                        <th>价格</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                                <tr>
+                        <td class="version_num">2.30</td>
+                        <td>英文</td>
+                        <td>2019-05-10</td>
+                        <td>30.3M</td>
+                        <td>
+                             
+                            <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=2.30&amp;k=0&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
+                                <i class="iconfont icon-disk-ctfile"></i> 
+                                城通网盘                                    </a>
+                             
+                            <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=2.30&amp;k=1&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
+                                <i class="iconfont icon-disk-baidu"></i> 
+                                百度云盘                                    </a>
+                                                            </td>
+                    </tr>
+                        <tr>
+                            <td class="version_num">1.52</td>
+                            <td>英文</td>
+                            <td>2018-07-04</td>
+                            <td>59.9M</td>
+                            <td>
+                                 
+                                <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=1.52&amp;k=2&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
+                                    <i class="iconfont icon-disk-ctfile"></i> 
+                                    城通网盘                                    </a>
+                                 
+                                <a class="btn-download" target="_blank" href="https://xclient.info/s/wolf.html?a=dl&amp;v=1.52&amp;k=3&amp;t=4d15fa81484cfb17e2392cf39e03d8ed23e0f4cf">
+                                    <i class="iconfont icon-disk-baidu"></i> 
+                                    百度云盘                                    </a>
+                                                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--相关应用 start-->
+<div class="related_item box">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-12">
+                <b class="tit">猜你喜欢</b>
+
+                <ul class="post_list row">
+                    {% for r in recommends %}
+                    <li class="col-3 col-6-m col-3-l col-3-xl">
+                        <div class="main">
+                            <a href="/item?info_id={{r['info_id']}}" title="{{r['info_title']}}">
+                                <img class="lim-icon" src="http://10.245.146.207/images/{{r['info_image'].split('/')[-1]}}" alt="{{r['info_title']}}">
+                                <div class="status_bar">
+                                    <span class="item download"><i class="icon-download"></i>{{r['info_price'][:5]+"..."}}</span>
+                                    <span class="item date"><i class="icon-date"></i>{{r['info_update_time']}}</span>
+                                </div>
+                                <div class="info">
+                                    <h3>{{r['info_title']}}</h3>
+                                    <p>{{r['info_detail']}}</p>
+
+                                </div>
+                            </a>
+                            <div class="cates">
+                                {% for t in r['info_tags'].split(",")[:3] %}
+                                    {% if len(t)>7 and "/" not in t%}
+
+                                    {% else %}
+                                        <a href="https://xclient.info/s/c/media/">{{t}}</a>     
+                                    {% end %}                       
+                                {% end %}
+                            </div>
+                        </div>
+                    </li>
+                    {% end %}
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -27,8 +27,8 @@
 
                     <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
 
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="https://xclient.info/a/">排行榜</a>
-                    <a class="nav-item nav-wishlist" href="#">分类</a>
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                    <a class="nav-item nav-wishlist" href="/types">分类</a>
                     <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
                 </div>
                 <div class="col-12 col-4-m">
@@ -83,6 +83,43 @@
     {% end %}
 
 </ul>
+<ol class="page-navigator">
+    {% if source=="main" %}
+        {% if page>1 %}
+        <li class="prev">
+            <a href="/?page={{page-1}}">« 前一页</a>
+        </li>
+        {% end %}
+
+        <li class="next">
+            <a href="/?page={{page+1}}">后一页 »</a>
+        </li>
+    {% end %}
+
+    {% if source=="search" %}
+        {% if page>1 %}
+        <li class="prev">
+            <a href="/?info_keyword={{kwd}}&page={{page-1}}">« 前一页</a>
+        </li>
+        {% end %}
+
+        <li class="next">
+            <a href="/?info_keyword={{kwd}}&page={{page+1}}">后一页 »</a>
+        </li>
+    {% end %}
+
+    {% if source=="tag" %}
+        {% if page>1 %}
+        <li class="prev">
+            <a href="/?tag={{kwd}}&page={{page-1}}">« 前一页</a>
+        </li>
+        {% end %}
+
+        <li class="next">
+            <a href="/?tag={{kwd}}&page={{page+1}}">后一页 »</a>
+        </li>
+    {% end %}
+</ol>
 <script>
     var demobg = document.querySelector(".demo-bg");
     var demotxt = document.querySelector(".demo-txt");

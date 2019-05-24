@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>排行榜</title>
+<!--
+<link rel="stylesheet" href="https://img.xclient.info/css/styles.min.css">
+<link rel="stylesheet" href="https://img.xclient.info/css/style.v3.css?v=19041513">-->
+<link rel="stylesheet" href="/static/css/styles.min.css">
+<link rel="stylesheet" href="/static/css/style.v3.css">
+<!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+</head>
+<body>
+
+<header class="header" id="header">
+    
+    <div class="container-xl">
+        <div class="row clear">
+
+          <div class="col-12 col-9-m">
+              <div class="row clear">
+                <div class="col-12 col-8-m nav">
+                    <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
+
+                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
+
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                    <a class="nav-item nav-wishlist" href="/types">分类</a>
+                    <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
+                </div>
+                <div class="col-12 col-4-m">
+                        <form id="search" method="post" action="/search">
+                            <span class="input_wrap">
+                                <input type="text" name="info_keyword" class="text" placeholder="输入关键字搜索" />
+                                <button type="submit" class="submit icon-search"></button>
+                            </span>
+                            <input type="hidden" name="t" value="soft" />
+                        </form>
+                </div>
+              </div>
+                
+          </div>
+          
+        </div>
+    </div>
+</header><!-- end #header -->
+
+<br>
+<form action="demo-form.php" method="get">
+<input list="browsers" name="browser">
+<datalist id="browsers">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Chrome">
+  <option value="Opera">
+  <option value="Safari">
+</datalist>
+<input type="submit">
+</form>
+
+
+<ul class="post_list row">
+    {% for info in infos %}
+    <li class="col-3 col-6-m col-3-l col-3-xl">
+        <div class="main">
+            <a href="/item?info_id={{info['info_id']}}" title="{{info['info_title']}}">
+                {% if info['info_image'] %}
+                <img src="http://10.245.146.207/images/{{info['info_image'].split('/')[-1]}}" alt="{{info['info_title']}}">
+                {% end %}
+                <div class="status_bar">
+                    <span class="item download">
+                        <span class="glyphicon glyphicon-usd"></span>
+                        <font color="#4eaade">{{info['info_price'][:8]}}</font>  
+                    </span>
+                    <span class="item date">
+                        <i class="icon-date"></i>
+                        {{info['info_update_time']}}                                              
+                    </span>
+                </div>
+                <div class="info">
+                    <h3>{{info['info_title']}}</h3>
+                    <p>{{info['info_detail']}}</p>
+                </div>
+            </a>
+            <div class="cates">
+                {% if info['info_tags'] %}
+                    {% for tag in info['info_tags'].split(",")[:3]%}
+                    <a href="#">{{tag}}</a>
+                    {% end %}
+                {% end %}
+            </div>
+        </div>
+    </li>
+    {% end %}
+
+</ul>
+
+                                            
+</div>
+
+
