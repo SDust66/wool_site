@@ -21,14 +21,15 @@ class MainPageHandler(tornado.web.RequestHandler):
         end   = 20*page
         sql = "SELECT * FROM infos ORDER BY info_id DESC LIMIT %s,%s"
         infos = mysql_conn.query(sql,start,end)
+        total = len(infos)
 
         # 创建session对象，cookie保留1天
         session = session_zc.Session(self, 1)
         # 判断session里的zhuangtai等于True
         if session['zhuangtai'] == True:
             #wzname = session['yhm']
-            self.render('main_page.html',infos=infos,page=page,source="main",username=session['yhm'])
+            self.render('main_page.html',infos=infos,page=page,total=total,source="main",username=session['yhm'])
         else:
-            self.render('main_page.html',infos=infos,page=page,source="main",username=" ")
+            self.render('main_page.html',infos=infos,page=page,total=total,source="main",username=" ")
 
         

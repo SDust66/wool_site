@@ -5,6 +5,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
+import session_zc
 
 #mysql_conn = torndb.Connection("10.245.146.207:3306","wool",user="campuswool",password="campuswool",charset="utf8")
 mysql_conn = torndb.Connection("localhost:3306","hitwool",user="wool",password="wool",charset="utf8")
@@ -29,8 +30,7 @@ class SingleItemHandler(tornado.web.RequestHandler):
         '''
         推荐最热门的优惠信息
         '''
-        sql = 'SELECT * FROM infos,infos_comment WHERE infos.info_id=infos_comment.info_id\
-                 ORDER BY info_visited DESC LIMIT 5'
+        sql = 'SELECT * FROM infos ORDER BY info_visited DESC LIMIT 5'
 
         #top = mysql_conn.query(sql)
         top = []
@@ -51,7 +51,7 @@ class SingleItemHandler(tornado.web.RequestHandler):
         '''
         info_id = self.get_argument('info_id').encode("utf-8")
         sql = "SELECT * FROM infos WHERE infos.info_id=%s"
-        print mysql_conn.query(sql,info_id)
+        #print mysql_conn.query(sql,info_id)
         infos = mysql_conn.query(sql,info_id)[0]
         if infos['info_detail']:
             infos['info_detail'] = infos['info_detail'].encode("utf-8").replace("。","。<br>")
@@ -61,7 +61,15 @@ class SingleItemHandler(tornado.web.RequestHandler):
         top = self.get_top()
         self.update_visited_count(info_id)
         
-        self.render('detail_page.html',infos=infos,recommends=recommends,top=top)
+        # 创建session对象，cookie保留1天
+        session = session_zc.Session(self, 1)
+        # 判断session里的zhuangtai等于True
+        if session['zhuangtai'] == True:
+            #wzname = session['yhm']
+            self.render('detail_page.html',infos=infos,recommends=recommends,top=top,username=session['yhm'])
+        else:
+            self.render('detail_page.html',infos=infos,recommends=recommends,top=top,username=" ")
+        #self.render('detail_page.html',infos=infos,recommends=recommends,top=top)
 
     def post(self):
         pass

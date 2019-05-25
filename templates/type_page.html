@@ -11,48 +11,66 @@
 <link rel="stylesheet" href="https://img.xclient.info/css/style.v3.css?v=19041513">-->
 <link rel="stylesheet" href="/static/css/styles.min.css">
 <link rel="stylesheet" href="/static/css/style.v3.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
 <body>
 
-<header class="header" id="header">
+        <header class="header" id="header">
     
-    <div class="container-xl">
-        <div class="row clear">
-
-          <div class="col-12 col-9-m">
-              <div class="row clear">
-                <div class="col-12 col-8-m nav">
-                    <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-
-                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
-
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
-                    <a class="nav-item nav-wishlist" href="/types">分类</a>
-                    <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
+                <div class="container-xl">
+                    <div class="row clear">
+            
+                      <div class="col-12 col-9-m">
+                          <div class="row clear">
+                            <div class="col-12 col-4-m nav">
+                                <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
+                                <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                                <a class="nav-item nav-wishlist" href="/types">分类</a>
+                            </div>
+                            <div class="col-12 col-4-m">
+                                    <form id="search" method="post" action="/search">
+                                        <span class="input_wrap">
+                                            <input type="text" name="info_keyword" class="text" placeholder="输入关键字搜索" />
+                                            <button type="submit" class="submit icon-search"></button>
+                                        </span>
+                                        <input type="hidden" name="t" value="soft" />
+                                    </form>
+                            </div>
+                            <div class="col-12 col-4-m">
+                                <ul class="nav navbar-nav navbar-right">
+                                  <li class="dropdown ">
+                                    {% if username == " "%}
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/login">登录</a> <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/signin">注册</a> <span class="caret"></span></a>
+                                    {% else %}
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/mypo">我的爆料</a></li>
+                                            <li><a href="/po">我要爆料</a></li>
+                                            <li><a href="/subscription">我的订阅</a></li>
+                                            <li><a href="/logout">退出</a></li>
+                                        </ul>
+                                    {% end %}
+                                  </li>
+                                </ul>
+                            </div>
+                        </div>
+                      </div>
+                      
+                    </div>
                 </div>
-                <div class="col-12 col-4-m">
-                        <form id="search" method="post" action="/search">
-                            <span class="input_wrap">
-                                <input type="text" name="info_keyword" class="text" placeholder="输入关键字搜索" />
-                                <button type="submit" class="submit icon-search"></button>
-                            </span>
-                            <input type="hidden" name="t" value="soft" />
-                        </form>
-                </div>
-              </div>
-                
-          </div>
-          
-        </div>
-    </div>
-</header><!-- end #header -->
+            </header><!-- end #header -->
 <br>
 <div id="lim-cate-list" class="post-filter">
 	{% for t in tags_count %}
-	        <a href="/search?tag={{t['info_tag']}}" class="" title="热度{{t['info_count']}}">{{t['info_tag']}}</a>
+	        <a href="/search?tag={{t['tag_name']}}" class="" title="热度{{t['tag_usenum']}}">{{t['tag_name']}}</a>
 	{% end %}
 
                                             
 </div>
-
+</body>
+</html>

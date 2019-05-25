@@ -13,9 +13,10 @@ class CommentItemHandler(tornado.web.RequestHandler):
 	def get(self):
 		yn = self.get_argument("yn").encode("utf-8")
 		info_id = self.get_argument("info_id").encode("utf-8")
-		print yn
+		#print yn
 		if yn == "y":
-			sql = "UPDATE infos_comment SET up = up + 1 WHERE info_id=%s;"
+			sql = "UPDATE infos SET info_up_num = info_up_num + 1 WHERE info_id=%s;"
 		elif yn == "n":
-			sql = "UPDATE infos_comment SET down = down + 1 WHERE info_id=%s;"
+			sql = "UPDATE infos SET info_down_num = info_down_num + 1 WHERE info_id=%s;"
 	    	mysql_conn.execute(sql,info_id)
+		

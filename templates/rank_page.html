@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="https://img.xclient.info/css/style.v3.css?v=19041513">-->
 <link rel="stylesheet" href="/static/css/styles.min.css">
 <link rel="stylesheet" href="/static/css/style.v3.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
 <body>
@@ -22,14 +26,10 @@
 
           <div class="col-12 col-9-m">
               <div class="row clear">
-                <div class="col-12 col-8-m nav">
+                <div class="col-12 col-4-m nav">
                     <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-
-                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
-
                     <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
                     <a class="nav-item nav-wishlist" href="/types">分类</a>
-                    <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
                 </div>
                 <div class="col-12 col-4-m">
                         <form id="search" method="post" action="/search">
@@ -40,27 +40,30 @@
                             <input type="hidden" name="t" value="soft" />
                         </form>
                 </div>
-              </div>
-                
+                <div class="col-12 col-4-m">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown ">
+                        {% if username == " "%}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/login">登录</a> <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/signin">注册</a> <span class="caret"></span></a>
+                        {% else %}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/mypo">我的爆料</a></li>
+                                <li><a href="/po">我要爆料</a></li>
+                                <li><a href="/subscription">我的订阅</a></li>
+                                <li><a href="/logout">退出</a></li>
+                            </ul>
+                        {% end %}
+                      </li>
+                    </ul>
+                </div>
+            </div>
           </div>
           
         </div>
     </div>
 </header><!-- end #header -->
-
-<br>
-<form action="demo-form.php" method="get">
-<input list="browsers" name="browser">
-<datalist id="browsers">
-  <option value="Internet Explorer">
-  <option value="Firefox">
-  <option value="Chrome">
-  <option value="Opera">
-  <option value="Safari">
-</datalist>
-<input type="submit">
-</form>
-
 
 <ul class="post_list row">
     {% for info in infos %}
@@ -68,12 +71,19 @@
         <div class="main">
             <a href="/item?info_id={{info['info_id']}}" title="{{info['info_title']}}">
                 {% if info['info_image'] %}
-                <img src="http://10.245.146.207/images/{{info['info_image'].split('/')[-1]}}" alt="{{info['info_title']}}">
+                    <img src="{{info['info_image']}}">
+                {% else %}
+                    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1247515164,1728120698&fm=15&gp=0.jpg">
                 {% end %}
                 <div class="status_bar">
                     <span class="item download">
-                        <span class="glyphicon glyphicon-usd"></span>
-                        <font color="#4eaade">{{info['info_price'][:8]}}</font>  
+                            {% if info['info_price']=="activity" %}
+                            <font color="#4eaade">ID:</font> 
+                            <font color="#4eaade">{{info['info_act_id']}}</font> 
+                            {% else %}
+                            <span class="glyphicon glyphicon-usd"></span>
+                            <font color="#4eaade">{{info['info_price'][:8]}}</font>  
+                            {% end %}
                     </span>
                     <span class="item date">
                         <i class="icon-date"></i>
@@ -86,8 +96,8 @@
                 </div>
             </a>
             <div class="cates">
-                {% if info['info_tags'] %}
-                    {% for tag in info['info_tags'].split(",")[:3]%}
+                {% if info['info_label'] %}
+                    {% for tag in info['info_label'].split(",")[:3]%}
                     <a href="#">{{tag}}</a>
                     {% end %}
                 {% end %}

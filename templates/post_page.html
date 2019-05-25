@@ -47,7 +47,7 @@
                                 {% else %}
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">我的保存</a></li>
+                                        <li><a href="/mypo">我的保存</a></li>
                                         <li><a href="/po">我要爆料</a></li>
                                         <li><a href="/subscription">我的订阅</a></li>
                                         <li><a href="/logout">退出</a></li>
@@ -114,7 +114,8 @@
                 <label id="x2" style="position: absolute;top:2px;left: 95%;font-size: 25px;">x</label>
                 <form method="post" action="/po">
                     <p>标题:<input class="textbox" type="text" name="info_title"></p>
-                    <p>简介:<input class="textbox" type="text" name="info_price"></p>
+                    <p>到梦空间ID:<input class="textbox" type="number" name="label"></p>
+                    <input type="hidden" name="info_price" value="activity">
                     <p>详情:<input class="textbox" type="text" name="info_detail"></p>
                     <p>活动图片:<input class="textbox" type="url" name="info_image"></p>
                     <p>提醒：请使用外链代替。外链图床建议：<a href="https://sm.ms" target="_blank">sm.ms</a></p>
@@ -145,7 +146,6 @@
                         <option value="其他校级组织">其他校级组织</option>
                         <option value="社团">社团</option>
                     </select></p>
-                    <p>到梦空间ID:<input class="textbox" type="number" name="label"></p>
                     <input type="submit"   class="btn btn-primary">
                 </form>
             </div>

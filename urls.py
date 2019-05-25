@@ -9,7 +9,8 @@ from handlers.loginhandler 	 import LoginHandler
 from handlers.logouthandler import LogoutHandler
 from handlers.signhandler import SignHandler
 from handlers.subscripHandler import SubscriptionPageHandler
-
+from handlers.myposthandler import MypostPageHandler
+from handlers.reporthandler import ReportHandler
 
 urls=[		
 		(r'/',MainPageHandler),
@@ -18,9 +19,11 @@ urls=[
         (r'/search',SearchPageHandler),
         (r'/comment',CommentItemHandler),
         (r'/types',TypesHandler),
-        (r'/rank/(\w+)',RankPageHandler),
+        (r'/rank',RankPageHandler),
         (r'/login',LoginHandler),
         (r'/logout',LogoutHandler),
         (r'/signin',SignHandler),
-        (r'/subscription',SubscriptionPageHandler)
+        (r'/subscription',SubscriptionPageHandler),
+        (r'/mypo',MypostPageHandler),
+        (r'/report',ReportHandler)
 ]

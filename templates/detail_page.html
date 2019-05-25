@@ -8,15 +8,19 @@
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>{{infos['info_title']}}</title>
-<link href="https://cdn.bootcss.com/Swiper/4.2.0/css/swiper.min.css" rel="stylesheet">
-<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+<!--
 <link rel="stylesheet" href="https://img.xclient.info/css/styles.min.css">
-<link rel="stylesheet" href="/static/css/style.v3.min.css">
-<script src="https://img.xclient.info/js/vue.min.js"></script>
-
-
+<link rel="stylesheet" href="https://img.xclient.info/css/style.v3.css?v=19041513">-->
+<link rel="stylesheet" href="/static/css/styles.min.css">
+<link rel="stylesheet" href="/static/css/style.v3.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
 <body>
+
 <header class="header" id="header">
     
     <div class="container-xl">
@@ -24,15 +28,10 @@
 
           <div class="col-12 col-9-m">
               <div class="row clear">
-                <div class="col-12 col-8-m nav">
+                <div class="col-12 col-4-m nav">
                     <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-
-                    <a class="nav-item nav-soft" v-bind:class="{current:at.indexOf('soft')>=0}" href="https://xclient.info/s/">我的订阅</a>
-
                     <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
-
-                    <a class="nav-item nav-wishlist" href="/types" >分类</a>
-                    <a class="nav-item nav-feedback" v-bind:class="{current:(at=='page'&&subat=='feedback')}" href="/po">我要爆料</a>
+                    <a class="nav-item nav-wishlist" href="/types">分类</a>
                 </div>
                 <div class="col-12 col-4-m">
                         <form id="search" method="post" action="/search">
@@ -43,8 +42,25 @@
                             <input type="hidden" name="t" value="soft" />
                         </form>
                 </div>
-              </div>
-                
+                <div class="col-12 col-4-m">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown ">
+                        {% if username == " "%}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/login">登录</a> <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <a href="/signin">注册</a> <span class="caret"></span></a>
+                        {% else %}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/mypo">我的爆料</a></li>
+                                <li><a href="/po">我要爆料</a></li>
+                                <li><a href="/subscription">我的订阅</a></li>
+                                <li><a href="/logout">退出</a></li>
+                            </ul>
+                        {% end %}
+                      </li>
+                    </ul>
+                </div>
+            </div>
           </div>
           
         </div>
@@ -56,7 +72,11 @@
 <div class="post-head media">
 
     <div class="container-xl">
-        <img src="{{infos['info_image']}}">
+        {% if infos['info_image'] %}
+            <div align="center"><img src="{{infos['info_image']}}" height="260"></div>
+        {% else %}
+            <div align="center"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1247515164,1728120698&fm=15&gp=0.jpg"></div>
+        {% end %}
         <h1 class="post-title">{{infos['info_title']}}</h1>
         <ul class="post-meta">
             <li>
@@ -105,7 +125,12 @@
             <div class="col-12 col-4-m">
                 <div class="white-box">
                     <span class="downloads">
-                        {{infos['info_price']}}                    
+                        {% if infos['info_price'] == "activity" %}
+                            <font color="#4eaade">ID:</font> 
+                            {{infos['info_act_id']}}   
+                        {% else %}
+                            {{infos['info_price']}}     
+                        {% end %}               
                     </span>
 
                     <div class="download_btn " background-color= "#4CAF50">
@@ -122,11 +147,11 @@
                             <tbody>
                             <tr>
                                 <th>爆料人</th>
-                                <td>6.2.1-20190416</td>
+                                <td>{{infos['info_update_user']}}</td>
                             </tr>
                             <tr>
                                 <th>类别</th>
-                                <td><a href="https://xclient.info/s/c/media/">{{infos['info_label'][1]}}</a></td>
+                                <td><a href="/search?tag={{infos['info_label'][1]}}">{{infos['info_label'][1]}}</a></td>
                             </tr>
                             <tr>
                                 <th>更新时间</th>
@@ -138,94 +163,86 @@
                 </div>
             </div>
         </div>
-
         <div class="row pad-top-20">
             <div class="col-12 col-8-m" id="main" role="main">
-
                 <div class="white-box">
-
                     <article class="post">
-
-
                         <div class="post-summary">
                             <p>{{infos['info_title']}}</p>
                         </div>
-
                         <div class="post-content" id="post-content">
                             <div class="post-union"></div>
                             {{infos['info_detail']}}
-
                         </div>
-
                     </article>
-
                 </div>
-
             </div><!-- end #main-->
+            <div class="col-12 col-4-m kit-hidden-tb" id="secondary" role="complementary">
+                <div>
+                    <div class="white-box">
+                        <!-- ad sidebar -->
+                        <div class="side_app_box box">
+                            <b class="tit">热门优惠</b>
+                                <ul class="app_list">
+                                {% for t in top %}
 
-
-
-<div class="col-12 col-4-m kit-hidden-tb" id="secondary" role="complementary">
-    <div class="white-box">
-
-
-
-        <!-- ad sidebar -->
-        
-        <div class="side_app_box box">
-            <b class="tit">热门优惠</b>
-                <ul class="app_list">
-                {% for t in top %}
-
-                    <li>
-                        <div class="main">
-                            <a href="/item?info_id={{t['info_id']}}" title="Sketch 54.1 轻量易用的矢量设计工具">
-                                <img class="lim-icon" src="http://10.245.146.207/images/{{t['info_image'].split('/')[-1]}}" alt="Sketch 54.1 轻量易用的矢量设计工具">
-                                
-                                <div class="info">
-                                    <h3>{{t['info_title']}}</h3>
-                                    <p>{{t['info_detail']}}</p>
-                                </div>
-                                <div class="status_bar">
-                                        <span class="item download">
-                                            <i class="icon-view"></i>
-                                            {{t['info_visited']}}                                 </span>
-                                        <span class="item date">
-                                            <i class="icon-date"></i>
-                                            {{t['info_update_time']}}                                    </span>
-                                </div>
-                            </a>
-                            <div class="cates">
-                                <a href="/item?info_id={{t['info_id']}}">{{t['info_label'].split(",")[0]}}</a>                        </div>
+                                    <li>
+                                        <div class="main">
+                                            <a href="/item?info_id={{infos['info_id']}}" title={{infos['info_title']}}>
+                                                <img class="lim-icon" src="{{infos['info_image']}}" alt={{infos['info_title']}}>
+                                                
+                                                <div class="info">
+                                                    <h3>{{infos['info_title']}}</h3>
+                                                    <p>{{infos['info_detail']}}</p>
+                                                </div>
+                                                <div class="status_bar">
+                                                        <span class="item download">
+                                                            <i class="icon-view"></i>
+                                                            {{infos['info_visited']}}                                 </span>
+                                                        <span class="item date">
+                                                            <i class="icon-date"></i>
+                                                            {{infos['info_update_time']}}                                    </span>
+                                                </div>
+                                            </a>
+                                            <div class="cates">
+                                                <a href="/item?info_id={{infos['info_id']}}">{{infos['info_label'].split(",")[0]}}</a>                        </div>
+                                        </div>
+                                    </li>
+                                {% end %}
+                                </ul>
                         </div>
-                    </li>
-                {% end %}
-                </ul>
+                    </div>
+            
+                    <div class="white-box">
+                        <div class="side_app_box box">
+                        <div align='center' class="error_report_box error_report_box_new clearfix">
+                        <!--<div class="report_title">我要举报：</div>-->
+                        <b class="tit">我要举报：</b>
+                        <ul class="error_report">
+                        <li class="li other" id="other_report_reason" data-name="其他举报"><div class="other_report_box">
+                        请选择举报理由：
+                        <ul class="report_reason">
+                                
+                                    <input type="checkbox" name="reason" value="bad">假冒伪劣<br>
+                                    <input type="checkbox" name="reason" value="porn">色情反动<br>
+                                    <input type="checkbox" name="reason" value="fake">虚假宣传<br>
+                                    <input type="checkbox" name="reason" value="other">其他<br>
+                                    <a href="/report?info_id={{infos['info_id']}}">
+                                        <input  type="submit"  class="download_btn"> 
+                                    </a>
+                                
+                        </ul>
 
+                        </div>
+                        </li>
+                        </ul>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
     </div>
-</div>
-<div class="error_report_box error_report_box_new clearfix">
-<div class="report_title">我要举报：</div>
-<ul class="error_report">
-
-
-<li class="li other" id="other_report_reason" data-name="其他举报"><div class="other_report_box">
-请选择举报理由：
-<ul class="report_reason">
-        <form method="post" action="/item">
-            <input type="checkbox" name="reason" value="bad">假冒伪劣<br>
-            <input type="checkbox" name="reason" value="porn">色情反动<br>
-            <input type="checkbox" name="reason" value="fake">虚假宣传<br>
-            <input type="checkbox" name="reason" value="other">其他<br>
-            <input type="submit">
-        </form>
-</ul>
-
-</div>
-</li>
-</ul>
 </div>
 
 
