@@ -67,8 +67,6 @@
     </div>
 </header><!-- end #header -->
 
-
-
 <div class="post-head media">
 
     <div class="container-xl">
@@ -108,17 +106,17 @@
     </div>
 </div>
 
-
 <div id="body">
     <div class="container-xl">
         <div class="row">
             <div class="col-12 col-8-m">
                 <div class="white-box">
                     <div class="album-swiper-container swiper-container">
-                        
+                        <div class="swiper-wrapper lim-album" id="swiper-wrapper">
+                        <img src="{{infos['info_image']}}">                                
                         <!-- Add Pagination -->
                         <div class="swiper-scrollbar"></div>
-                       
+                    </div>
                     </div>
                 </div>
             </div>
@@ -164,7 +162,7 @@
                             </tr>
                             <tr>
                                 <th>类别</th>
-                                <td><a href="/search?tag={{infos['info_label'][1]}}">{{infos['info_label'][1]}}</a></td>
+                                <td><a href="/search?tag=${{infos['info_label'][1]}}">{{infos['info_label'][1]}}</a></td>
                             </tr>
                             <tr>
                                 <th>更新时间</th>
@@ -201,24 +199,24 @@
 
                                     <li>
                                         <div class="main">
-                                            <a href="/item?info_id={{infos['info_id']}}" title={{infos['info_title']}}>
-                                                <img class="lim-icon" src="{{infos['info_image']}}" alt={{infos['info_title']}}>
+                                            <a href="/item?info_id={{t['info_id']}}" title={{t['info_title']}}>
+                                                <img class="lim-icon" src="{{t['info_image']}}" alt={{t['info_title']}}>
                                                 
                                                 <div class="info">
-                                                    <h3>{{infos['info_title']}}</h3>
-                                                    <p>{{infos['info_detail']}}</p>
+                                                    <h3>{{t['info_title']}}</h3>
+                                                    <p>{{t['info_detail']}}</p>
                                                 </div>
                                                 <div class="status_bar">
                                                         <span class="item download">
                                                             <i class="icon-view"></i>
-                                                            {{infos['info_visited']}}                                 </span>
+                                                            {{t['info_visited']}}                                 </span>
                                                         <span class="item date">
                                                             <i class="icon-date"></i>
-                                                            {{infos['info_update_time']}}                                    </span>
+                                                            {{t['info_update_time']}}                                    </span>
                                                 </div>
                                             </a>
                                             <div class="cates">
-                                                <a href="/item?info_id={{infos['info_id']}}">{{infos['info_label'].split(",")[0]}}</a>                        </div>
+                                                <a href="/item?info_id={{t['info_id']}}"></a>                        </div>
                                         </div>
                                     </li>
                                 {% end %}
@@ -271,7 +269,7 @@
                     <li class="col-3 col-6-m col-3-l col-3-xl">
                         <div class="main">
                             <a href="/item?info_id={{r['info_id']}}" title="{{r['info_title']}}">
-                                <img class="lim-icon" src="http://10.245.146.207/images/{{r['info_image'].split('/')[-1]}}" alt="{{r['info_title']}}">
+                                <img class="lim-icon" src="{{r['info_image']}}" alt="{{r['info_title']}}">
                                 <div class="status_bar">
                                     <span class="item download"><i class="icon-download"></i>{{r['info_price'][:5]+"..."}}</span>
                                     <span class="item date"><i class="icon-date"></i>{{r['info_update_time']}}</span>

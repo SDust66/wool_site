@@ -115,11 +115,9 @@
         </li>
         {% end %}
 
-        {% if total >20 %}
         <li class="next">
             <a href="/?page={{page+1}}">后一页 »</a>
         </li>
-        {% end %}
     {% end %}
 
     {% if source=="search" %}
@@ -129,11 +127,9 @@
         </li>
         {% end %}
 
-        {% if total>20 %}
         <li class="next">
             <a href="/?info_keyword={{kwd}}&page={{page+1}}">后一页 »</a>
         </li>
-        {% end %}
     {% end %}
 
     {% if source=="tag" %}
@@ -143,11 +139,9 @@
         </li>
         {% end %}
 
-        {% if total>20 %}
         <li class="next">
             <a href="/?tag={{kwd}}&page={{page+1}}">后一页 »</a>
         </li>
-        {% end %}
     {% end %}
 </ol>
 <script>

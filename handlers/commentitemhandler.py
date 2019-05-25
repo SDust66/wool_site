@@ -7,7 +7,7 @@ import tornado.options
 import tornado.web
 
 #mysql_conn = torndb.Connection("10.245.146.207:3306","wool",user="campuswool",password="campuswool",charset="utf8")
-mysql_conn = torndb.Connection("localhost:3306","hitwool",user="wool",password="wool",charset="utf8")
+mysql_conn = torndb.Connection("10.241.118.52:3306","hitwool",user="wool",password="wool",charset="utf8")
 
 class CommentItemHandler(tornado.web.RequestHandler):
 	def get(self):

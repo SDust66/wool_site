@@ -8,7 +8,7 @@ import tornado.web
 import session_zc
 
 #mysql_conn = torndb.Connection("10.245.146.207:3306","wool",user="campuswool",password="campuswool",charset="utf8")
-mysql_conn = torndb.Connection("localhost:3306","hitwool",user="wool",password="wool",charset="utf8")
+mysql_conn = torndb.Connection("10.241.118.52:3306","hitwool",user="wool",password="wool",charset="utf8")
 
 class SingleItemHandler(tornado.web.RequestHandler):
 
@@ -21,8 +21,8 @@ class SingleItemHandler(tornado.web.RequestHandler):
                 'SELECT * FROM infos WHERE MATCH(info_label) AGAINST(%s)\
                 LIMIT 8;'
 
-        #recommends = mysql_conn.query(sql,sql_param[2],sql_param[1],sql_param[0])
-        recommends = []
+        recommends = mysql_conn.query(sql,sql_param[2],sql_param[1],sql_param[0])
+        #recommends = []
         return recommends
 
 
@@ -32,8 +32,8 @@ class SingleItemHandler(tornado.web.RequestHandler):
         '''
         sql = 'SELECT * FROM infos ORDER BY info_visited DESC LIMIT 5'
 
-        #top = mysql_conn.query(sql)
-        top = []
+        top = mysql_conn.query(sql)
+        #top = []
         return top
 
     def update_visited_count(self,info_id):

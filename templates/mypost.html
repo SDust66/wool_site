@@ -128,7 +128,7 @@
         </li>
         {% end %}
 
-        {% if total>20 %}
+        {% if total>=20 %}
         <li class="next">
             <a href="/?info_keyword={{kwd}}&page={{page+1}}">后一页 »</a>
         </li>
@@ -142,7 +142,7 @@
         </li>
         {% end %}
 
-        {% if total>20 %}
+        {% if total>=20 %}
         <li class="next">
             <a href="/?tag={{kwd}}&page={{page+1}}">后一页 »</a>
         </li>
