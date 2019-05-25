@@ -17,14 +17,15 @@ class SubscriptionPageHandler(tornado.web.RequestHandler):
         # 判断session里的zhuangtai等于True
         if session['zhuangtai'] == True:
             wzname = session['yhm']
-            sql_tag = "SELECT usertag FROM tags_user WHERE username = '%s'" % (wzname)
+            sql_tag = "SELECT user_tag FROM userinformation WHERE user_name = '%s'" % (wzname)
             tagstr = mysql_conn.query(sql_tag)
             #print(type(tagstr), type(tagstr[0]['usertag']),tagstr,tagstr[0]['usertag'])
             if len(tagstr)==0:
-                self.redirect('/')
+                self.redirect('/sub_change?tag=zero')
             else:
-                tags = tagstr[0]['usertag'].encode('utf-8')
+                tags = tagstr[0]['user_tag'].encode('utf-8')
                 tags = tags.split(',')
+                print("tags:",tags)
                 infos = []
                 for tag in tags:
                     #print(tag)
@@ -32,6 +33,8 @@ class SubscriptionPageHandler(tornado.web.RequestHandler):
                     info = mysql_conn.query(sql)
                     infos.extend(info)
                 #print(infos)
+                run_function = lambda x, y: x if y in x else x + [y]
+                infos = reduce(run_function, [[], ] + infos)
                 self.render('subscription.html',infos=infos,username=wzname)
         else:
             self.redirect('/login')

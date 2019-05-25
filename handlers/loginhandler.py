@@ -27,7 +27,7 @@ class LoginHandler(tornado.web.RequestHandler):
 
         if result:
             #if loginname == 'admin' and password1 == 'admin':
-            print('登陆成功')
+            #print('登陆成功')
             # 创建session对象，cookie保留1天
             session = session_zc.Session(self,1)
             # 将用户名保存到session

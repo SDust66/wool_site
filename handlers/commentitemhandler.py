@@ -16,7 +16,9 @@ class CommentItemHandler(tornado.web.RequestHandler):
 		#print yn
 		if yn == "y":
 			sql = "UPDATE infos SET info_up_num = info_up_num + 1 WHERE info_id=%s;"
+			mysql_conn.execute(sql,info_id)
+			self.redirect("/item?info_id="+info_id)
 		elif yn == "n":
 			sql = "UPDATE infos SET info_down_num = info_down_num + 1 WHERE info_id=%s;"
-	    	mysql_conn.execute(sql,info_id)
-		
+			mysql_conn.execute(sql,info_id)
+			self.redirect("/item?info_id="+info_id)

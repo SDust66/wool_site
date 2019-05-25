@@ -28,7 +28,7 @@
               <div class="row clear">
                 <div class="col-12 col-4-m nav">
                     <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank/best">排行榜</a>
                     <a class="nav-item nav-wishlist" href="/types">分类</a>
                 </div>
                 <div class="col-12 col-4-m">
@@ -64,6 +64,14 @@
         </div>
     </div>
 </header><!-- end #header -->
+
+<br>
+<div id="lim-cate-list" class="post-filter">
+    <a href="/rank/goods" >商品总览</a>
+    <a href="/rank/activity" >活动总览</a>
+    <a href="/rank/visited" >当前热门</a>
+    <a href="/rank/best" >最受好评</a>
+
 
 <ul class="post_list row">
     {% for info in infos %}

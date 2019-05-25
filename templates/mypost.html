@@ -28,7 +28,7 @@
               <div class="row clear">
                 <div class="col-12 col-4-m nav">
                     <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank/best">排行榜</a>
                     <a class="nav-item nav-wishlist" href="/types">分类</a>
                 </div>
                 <div class="col-12 col-4-m">
@@ -114,11 +114,13 @@
         </li>
         {% end %}
 
+        {% if total >20 %}
         <li class="next">
             <a href="/?page={{page+1}}">后一页 »</a>
         </li>
+        {% end %}
     {% end %}
-
+<!-- 
     {% if source=="search" %}
         {% if page>1 %}
         <li class="prev">
@@ -126,9 +128,11 @@
         </li>
         {% end %}
 
+        {% if total>20 %}
         <li class="next">
             <a href="/?info_keyword={{kwd}}&page={{page+1}}">后一页 »</a>
         </li>
+        {% end %}
     {% end %}
 
     {% if source=="tag" %}
@@ -138,10 +142,12 @@
         </li>
         {% end %}
 
+        {% if total>20 %}
         <li class="next">
             <a href="/?tag={{kwd}}&page={{page+1}}">后一页 »</a>
         </li>
-    {% end %}
+        {% end %}
+    {% end %} -->
 </ol>
 <script>
     var demobg = document.querySelector(".demo-bg");

@@ -38,29 +38,31 @@ class SearchPageHandler(tornado.web.RequestHandler):
         if info_tag[0]=="$":
             info_tag = info_tag[1:]
 
-            print info_tag
-            print info_tag
-            print info_tag
+            # print info_tag
+            # print info_tag
+            # print info_tag
 
             if "/" in info_tag:
                 brand_en,brand_cn = info_tag.split("/")
 
-            if len(info_tag)<3 or len(brand_cn)<7 or len(brand_en)<3:
-                print "放弃FULLTEXT"
-                sql = "SELECT * FROM infos WHERE info_label like '%%%%%s%%%%' ORDER BY info_id DESC LIMIT %s,%s"%(info_tag,start,end)
-                infos = mysql_conn.query(sql)
+            # if len(info_tag)<3 or len(brand_cn)<7 or len(brand_en)<3:
+            #print "放弃FULLTEXT"
+            sql = "SELECT * FROM infos WHERE info_label like '%%%%%s%%%%' ORDER BY info_id DESC LIMIT %s,%s"%(info_tag,start,end)
+            infos = mysql_conn.query(sql)
 
-            else:
-                print "使用FULLTEXT"
-                sql = "SELECT * FROM infos WHERE MATCH(info_label) AGAINST(%s) ORDER BY info_id DESC LIMIT %s,%s"
-                infos = mysql_conn.query(sql,info_tag,start,end)
+            # else:
+            #     print "使用FULLTEXT"
+            #     sql = "SELECT * FROM infos WHERE MATCH(info_label) AGAINST(%s) ORDER BY info_id DESC LIMIT %s,%s"
+            #     infos = mysql_conn.query(sql,info_tag,start,end)
 
-            self.render('main_page.html',infos=infos,page=page,source="tag",kwd=info_tag,username=name)
+            total = len(infos)
+            self.render('main_page.html',infos=infos,page=page,total=total,source="tag",kwd=info_tag,username=name)
 
         else:
             sql = "SELECT * FROM infos WHERE info_title LIKE '%%%%%s%%%%' ORDER BY info_id DESC LIMIT %s,%s"%(info_tag,start,end)
             infos = mysql_conn.query(sql)
-            self.render('main_page.html',infos=infos,page=page,source="search",kwd=info_tag,username=name)
+            total = len(infos)
+            self.render('main_page.html',infos=infos,page=page,total=total,source="search",kwd=info_tag,username=name)
 
 
     def post(self):
@@ -76,6 +78,7 @@ class SearchPageHandler(tornado.web.RequestHandler):
         end   = 20*page        
         sql = "SELECT * FROM infos WHERE info_title LIKE '%%%%%s%%%%' ORDER BY info_id DESC LIMIT %s,%s"%(info_keyword,start,end)
         infos = mysql_conn.query(sql)
+        total = len(infos)
 
         # 创建session对象，cookie保留1天
         session = session_zc.Session(self, 1)
@@ -85,4 +88,4 @@ class SearchPageHandler(tornado.web.RequestHandler):
         else :
             name = " "
 
-        self.render('main_page.html',infos=infos,page=page,source="search",kwd=info_keyword,username=name)
+        self.render('main_page.html',infos=infos,page=page,total=total,source="search",kwd=info_keyword,username=name)

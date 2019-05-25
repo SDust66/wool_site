@@ -26,8 +26,9 @@ class MypostPageHandler(tornado.web.RequestHandler):
             end   = 20*page
             sql = "SELECT * FROM infos WHERE info_update_user='%s' ORDER BY info_id DESC LIMIT %s,%s"%(wzname,start,end)
             infos = mysql_conn.query(sql)
-            self.render('mypost.html',infos=infos,page=page,source="main",username=session['yhm'])
+            total = len(infos)
+            self.render('mypost.html',infos=infos,page=page,total=total,source="main",username=session['yhm'])
         else:
-            self.render('mypost.html',infos=infos,page=page,source="main",username=" ")
+            self.render('mypost.html',infos=infos,page=page,total=total,source="main",username=" ")
 
         

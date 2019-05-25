@@ -30,7 +30,7 @@
               <div class="row clear">
                 <div class="col-12 col-4-m nav">
                     <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                    <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank/best">排行榜</a>
                     <a class="nav-item nav-wishlist" href="/types">分类</a>
                 </div>
                 <div class="col-12 col-4-m">
@@ -133,11 +133,24 @@
                         {% end %}               
                     </span>
 
-                    <div class="download_btn " background-color= "#4CAF50">
-                        <a href="/comment?yn=y&info_id={{infos['info_id']}}" action="get">SKR！</a>
+                    <div class="download_btn " background-color= "#FFFFFF">
+                        {% if up_down['info_up_num'] and up_down['info_down_num'] %}
+                        <a href="/comment?yn=y&info_id={{infos['info_id']}}" action="get">SKR!  {{"%.2f%%"%(100*up_down['info_up_num']/ float(up_down['info_up_num']+up_down['info_down_num']))}}</a>
+
+                        {% else %}
+                        <a href="/comment?yn=y&info_id={{infos['info_id']}}" action="get">SKR!</a>
+
+                        {% end %}
+
                     </div>
                     <div class="download_btn">
-                        <a href="/comment?yn=n&info_id={{infos['info_id']}}">我觉得不行</a>
+                        {% if up_down['info_up_num'] and up_down['info_down_num'] %}
+                        <a href="/comment?yn=n&info_id={{infos['info_id']}}">我觉得不行  {{"%.2f%%"%(100*up_down['info_down_num']/float(up_down['info_up_num']+up_down['info_down_num']))}}</a>
+
+                        {% else %}
+                        <a href="/comment?yn=n&info_id={{infos['info_id']}}" action="get">我觉得不行</a>
+
+                        {% end %}
                     </div>
                     
 

@@ -28,7 +28,7 @@
                 <div class="row clear">
                   <div class="col-12 col-4-m nav">
                       <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-                      <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                      <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank/best">排行榜</a>
                       <a class="nav-item nav-wishlist" href="/types">分类</a>
                   </div>
                   <div class="col-12 col-4-m">
@@ -49,7 +49,7 @@
                           {% else %}
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
                               <ul class="dropdown-menu">
-                                  <li><a href="/mypo">我的保存</a></li>
+                                  <li><a href="/mypo">我的爆料</a></li>
                                   <li><a href="/po">我要爆料</a></li>
                                   <li><a href="/subscription">我的订阅</a></li>
                                   <li><a href="/logout">退出</a></li>
@@ -65,13 +65,19 @@
     </div>
 </header><!-- end #header -->
 
+<br>
+<div id="lim-cate-list" class="post-filter">
+    <a href="/sub_change?tag=zero" >修改订阅</a>
+
 <ul class="post_list row">
     {% for info in infos %}
     <li class="col-3 col-6-m col-3-l col-3-xl">
         <div class="main">
             <a href="/item?info_id={{info['info_id']}}" title="{{info['info_title']}}">
                 {% if info['info_image'] %}
-                <img src="http://10.245.146.207/images/{{info['info_image'].split('/')[-1]}}" alt="{{info['info_title']}}">
+                    <img src="{{info['info_image']}}">
+                {% else %}
+                    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1247515164,1728120698&fm=15&gp=0.jpg">
                 {% end %}
                 <div class="status_bar">
                     <span class="item download">

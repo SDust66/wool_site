@@ -26,7 +26,7 @@
                     <div class="row clear">
                         <div class="col-12 col-4-m nav">
                             <a class="nav-item nav-home" v-bind:class="{current:at=='index'}" href="/">全部羊毛</a>
-                            <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank">排行榜</a>
+                            <a class="nav-item nav-post" v-bind:class="{current:(at=='post'||at=='archive'||at=='category'||at=='tag')}" href="/rank/best">排行榜</a>
                             <a class="nav-item nav-wishlist" href="/types">分类</a>
                         </div>
                         <div class="col-12 col-4-m">
@@ -47,7 +47,7 @@
                                 {% else %}
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello! {{username}} <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/mypo">我的保存</a></li>
+                                        <li><a href="/mypo">我的爆料</a></li>
                                         <li><a href="/po">我要爆料</a></li>
                                         <li><a href="/subscription">我的订阅</a></li>
                                         <li><a href="/logout">退出</a></li>

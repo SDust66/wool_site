@@ -44,6 +44,15 @@ class SingleItemHandler(tornado.web.RequestHandler):
         sql = "UPDATE infos SET info_visited = info_visited + %s WHERE info_id=%s;"
         mysql_conn.execute(sql,str(add_visited),info_id)
 
+    def get_up_and_down(self,info_id):
+        '''
+        返回用户点赞，点踩的人数
+        '''
+        sql = "SELECT info_up_num,info_down_num FROM infos WHERE info_id=%s"
+        up_down = mysql_conn.query(sql,info_id)
+
+        return up_down
+
 
     def get(self):
         '''
@@ -58,6 +67,7 @@ class SingleItemHandler(tornado.web.RequestHandler):
         infos['info_label'] = infos['info_label'].split(",")[0:3]
 
         recommends = self.get_recommends(infos['info_label'])
+        up_and_down = self.get_up_and_down(info_id)[0]
         top = self.get_top()
         self.update_visited_count(info_id)
         
@@ -66,9 +76,9 @@ class SingleItemHandler(tornado.web.RequestHandler):
         # 判断session里的zhuangtai等于True
         if session['zhuangtai'] == True:
             #wzname = session['yhm']
-            self.render('detail_page.html',infos=infos,recommends=recommends,top=top,username=session['yhm'])
+            self.render('detail_page.html',infos=infos,recommends=recommends,top=top,up_down=up_and_down,username=session['yhm'])
         else:
-            self.render('detail_page.html',infos=infos,recommends=recommends,top=top,username=" ")
+            self.render('detail_page.html',infos=infos,recommends=recommends,top=top,up_down=up_and_down,username=" ")
         #self.render('detail_page.html',infos=infos,recommends=recommends,top=top)
 
     def post(self):

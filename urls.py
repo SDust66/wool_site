@@ -11,6 +11,7 @@ from handlers.signhandler import SignHandler
 from handlers.subscripHandler import SubscriptionPageHandler
 from handlers.myposthandler import MypostPageHandler
 from handlers.reporthandler import ReportHandler
+from handlers.subscripchangeHandler import SubscriptionChangeHandler
 
 urls=[		
 		(r'/',MainPageHandler),
@@ -19,11 +20,12 @@ urls=[
         (r'/search',SearchPageHandler),
         (r'/comment',CommentItemHandler),
         (r'/types',TypesHandler),
-        (r'/rank',RankPageHandler),
+        (r'/rank/(\w+)',RankPageHandler),
         (r'/login',LoginHandler),
         (r'/logout',LogoutHandler),
         (r'/signin',SignHandler),
         (r'/subscription',SubscriptionPageHandler),
         (r'/mypo',MypostPageHandler),
-        (r'/report',ReportHandler)
+        (r'/report',ReportHandler),
+        (r'/sub_change',SubscriptionChangeHandler)
 ]
