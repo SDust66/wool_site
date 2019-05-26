@@ -29,6 +29,6 @@ class MypostPageHandler(tornado.web.RequestHandler):
             total = len(infos)
             self.render('mypost.html',infos=infos,page=page,total=total,source="main",username=session['yhm'])
         else:
-            self.render('mypost.html',infos=infos,page=page,total=total,source="main",username=" ")
+            self.redirect('/login')
 
         

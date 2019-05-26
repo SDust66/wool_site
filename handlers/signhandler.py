@@ -29,7 +29,7 @@ class SignHandler(tornado.web.RequestHandler):
             self.write('邮箱已注册或者用户名已存在！')
         else:
             if re.match(r_mail_addr,loginemail) and len(loginname)<16:
-                if password1==password2:
+                if password1==password2 and password1!="":
                     try:
                         #执行语句
                         temp2 = "insert into userinformation(user_mail,user_name,user_pwd) values(%s,%s,%s)"
@@ -37,8 +37,7 @@ class SignHandler(tornado.web.RequestHandler):
                         print(str(e))
                     mysql_conn.execute(temp2, loginemail, loginname, password1)
                     self.redirect("/login")
-
                 else:
-                    self.write("两次密码不相同！")
+                    self.write("输入密码有误！")
             else:
                 self.write("邮箱或用户名不符合要求！")
